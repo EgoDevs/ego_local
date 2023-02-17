@@ -1,0 +1,10 @@
+[
+    {
+        "category": "infra",
+        "package": "ego_local",
+        "bin_name": "ego-local",
+        "config": "./configs/ego_local.json",
+        "post_install_sequence": 100,
+        "no_deploy": false
+    }
+]

@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "infra/ego_local/actor",
+    "infra/ego_local/mod",
+]
+
+[profile.release]
+lto = true
+opt-level = 'z'
