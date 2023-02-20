@@ -12,15 +12,14 @@ use std::collections::BTreeMap;
 use ego_macros::{inject_ego_api};
 use ego_types::registry::Registry;
 use ego_types::user::User;
-use ego_local_mod::types::{AdminAppCreateRequest, AdminWalletProviderAddRequest};
 inject_ego_api!();
 
 #[init]
 #[candid_method(init)]
 pub fn init() {
-  let caller = caller();
+  let caller = ic_cdk::api::caller();
+  info_log_add(format!("ego_local: init, caller is {}", caller.clone()).as_str());
 
-  ic_cdk::println!("==> add caller as the owner");
   owner_add(caller.clone());
 }
 
@@ -116,19 +115,10 @@ pub async fn wallet_app_install(
   Ok(user_app)
 }
 
-/********************   ego_ops method   ********************/
-#[update(name = "admin_wallet_provider_add")]
-#[candid_method(update, rename = "admin_wallet_provider_add")]
-pub fn admin_wallet_provider_add(_req: AdminWalletProviderAddRequest) -> Result<(), EgoError> {
-  info_log_add("ego_local: admin_wallet_provider_add");
+#[update(name = "remove_canister")]
+#[candid_method(update, rename = "remove_canister")]
+pub fn remove_canister(name: String) {
+  info_log_add("ego_local: remove_canister");
 
-  Ok(())
-}
-
-#[update(name = "admin_app_create")]
-#[candid_method(update, rename = "admin_app_create")]
-pub fn admin_app_create(_req: AdminAppCreateRequest) -> Result<(), EgoError> {
-  info_log_add("ego_local: admin_app_create");
-
-  Ok(())
+  canister_remove_all(name);
 }

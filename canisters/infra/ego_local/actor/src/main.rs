@@ -9,7 +9,6 @@ fn main() {}
 fn main() {
 
   use ic_cdk::export::Principal;
-  use ego_local_mod::types::*;
   use ego_types::app::EgoError;
   use ego_types::app::{AppId};
   use ego_types::app::UserApp;

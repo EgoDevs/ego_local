@@ -1,4 +1,4 @@
-# ego-rust-template
+# ego-local
 
 This Template is created for EGO projects
 
